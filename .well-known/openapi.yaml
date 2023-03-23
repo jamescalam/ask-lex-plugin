@@ -1,15 +1,14 @@
 openapi: 3.0.0
 info:
-  title: LangChain Docs API
+  title: Retrieval Plugin API
   version: 1.0.0
-  description: This API lets you search through the LangChain Python library documentation
+  description: This API lets you search through the LangChain Documentation.
 servers:
-  - url: https://lobster-app-znw6z.ondigitalocean.app/
+  - url: https://lobster-app-znw6z.ondigitalocean.app
 paths:
   /query:
     post:
       summary: Query
-      description: This endpoint accepts an array of search query objects, each containing a natural language query string ("query") and an optional metadata filter ("filter"). Filters can help refine search results based on criteria such as document source or time period, but are not necessary in most cases. You can send multiple queries to compare information from different sources or break down complex questions into sub-questions.
       operationId: query_query_post
       requestBody:
         content:
