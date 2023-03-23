@@ -9,6 +9,7 @@ paths:
   /query:
     post:
       summary: Query
+      description: This endpoint accepts an array of search query objects, each containing a natural language query string ("query") and an optional metadata filter ("filter"). Filters can help refine search results based on criteria such as document source or time period, but are not necessary in most cases. You can send multiple queries to compare information from different sources or break down complex questions into sub-questions.
       operationId: query_query_post
       requestBody:
         content:
