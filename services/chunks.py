@@ -1,6 +1,7 @@
 from typing import Dict, List, Optional, Tuple
 import uuid
 from models.models import Document, DocumentChunk, DocumentChunkMetadata
+from langchain.text_splitter import RecursiveCharacterTextSplitter
 
 import tiktoken
 
@@ -11,12 +12,21 @@ tokenizer = tiktoken.get_encoding(
     "cl100k_base"
 )  # The encoding scheme to use for tokenization
 
+# create the length function
+def tiktoken_len(text):
+    tokens = tokenizer.encode(
+        text,
+        disallowed_special=()
+    )
+    return len(tokens)
+
 # Constants
 CHUNK_SIZE = 200  # The target size of each text chunk in tokens
 MIN_CHUNK_SIZE_CHARS = 350  # The minimum size of each text chunk in characters
 MIN_CHUNK_LENGTH_TO_EMBED = 30  # Discard chunks shorter than this
 EMBEDDINGS_BATCH_SIZE = 128  # The number of embeddings to request at a time
 MAX_NUM_CHUNKS = 10000  # The maximum number of chunks to generate from a text
+
 
 
 def get_text_chunks(text: str, chunk_token_size: Optional[int]) -> List[str]:
@@ -101,7 +111,7 @@ def get_text_chunks(text: str, chunk_token_size: Optional[int]) -> List[str]:
 
 
 def create_document_chunks(
-    doc: Document, chunk_token_size: Optional[int]
+    doc: Document, chunk_token_size: Optional[int] = 400, chunk_overlap: Optional[int] = 20
 ) -> Tuple[List[DocumentChunk], str]:
     """
     Create a list of document chunks from a document object and return the document id.
@@ -121,8 +131,16 @@ def create_document_chunks(
     # Generate a document id if not provided
     doc_id = doc.id or str(uuid.uuid4())
 
+    # initialize the text splitter
+    text_splitter = RecursiveCharacterTextSplitter(
+        chunk_size=chunk_token_size,
+        chunk_overlap=chunk_overlap,  # number of tokens overlap between chunks
+        length_function=tiktoken_len,
+        separators=['\n\n', '.\n', '\n', '.', '?', '!', ' ', '']
+    )
+
     # Split the document text into chunks
-    text_chunks = get_text_chunks(doc.text, chunk_token_size)
+    text_chunks = text_splitter(doc.text)
 
     metadata = (
         DocumentChunkMetadata(**doc.metadata.__dict__)

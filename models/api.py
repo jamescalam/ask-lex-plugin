@@ -11,6 +11,8 @@ from typing import List, Optional
 
 class UpsertRequest(BaseModel):
     documents: List[Document]
+    chunk_token_size: Optional[int] = 400
+    chunk_overlap: Optional[int] = 20
 
 
 class UpsertResponse(BaseModel):
