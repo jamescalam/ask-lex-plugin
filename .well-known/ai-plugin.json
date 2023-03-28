@@ -10,10 +10,10 @@
   },
   "api": {
     "type": "openapi",
-    "url": "https://lobster-app-znw6z.ondigitalocean.app/.well-known/openapi.yaml",
+    "url": "https://ask-lex-ti7zy.ondigitalocean.app/.well-known/openapi.yaml",
     "has_user_authentication": false
   },
-  "logo_url": "https://lobster-app-znw6z.ondigitalocean.app/.well-known/logo.png",
+  "logo_url": "https://ask-lex-ti7zy.ondigitalocean.app/.well-known/logo.png",
   "contact_email": "james@pinecone.io", 
   "legal_info_url": "lior@pinecone.io"
 }
