@@ -1,9 +1,9 @@
 {
   "schema_version": "v1",
-  "name_for_model": "langchain_docs_db",
-  "name_for_human": "LangChain Docs",
-  "description_for_model": "Use this tool to get up to date information about the LangChain Python library. Do not use this tool if the user did not ask about langchain",
-  "description_for_human": "Up to date information about the LangChain Python library.",
+  "name_for_model": "ask_lex",
+  "name_for_human": "Ask Lex",
+  "description_for_model": "Use this tool to answer user questions using Lex Fridman podcasts. If the user states 'ask Lex' use this tool to get the answer.",
+  "description_for_human": "Collective wisdom from the Lex Fridman podcast.",
   "auth": {
     "type": "user_http",
     "authorization_type": "bearer"
@@ -14,6 +14,6 @@
     "has_user_authentication": false
   },
   "logo_url": "https://lobster-app-znw6z.ondigitalocean.app/.well-known/logo.png",
-  "contact_email": "hello@contact.com", 
-  "legal_info_url": "hello@legal.com"
+  "contact_email": "james@pinecone.io", 
+  "legal_info_url": "lior@pinecone.io"
 }

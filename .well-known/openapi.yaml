@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: Retrieval Plugin API
   version: 1.0.0
-  description: This API lets you search through the LangChain Documentation.
+  description: This API lets you search through the Lex Fridman podcasts.
 servers:
   - url: https://lobster-app-znw6z.ondigitalocean.app
 paths:
