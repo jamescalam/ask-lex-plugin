@@ -70,6 +70,7 @@ class PineconeDataStore(DataStore):
         Takes in a dict from document id to list of document chunks and inserts them into the index.
         Return a list of document ids.
         """
+        raise NotImplementedError
         # Initialize a list of ids to return
         doc_ids: List[str] = []
         # Initialize a list of vectors to upsert
@@ -181,6 +182,7 @@ class PineconeDataStore(DataStore):
         """
         Removes vectors by ids, filter, or everything from the index.
         """
+        raise NotImplementedError
         # Delete all vectors from the index if delete_all is True
         if delete_all == True:
             try:

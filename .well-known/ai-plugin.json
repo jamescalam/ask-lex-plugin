@@ -2,7 +2,7 @@
   "schema_version": "v1",
   "name_for_model": "ask_lex",
   "name_for_human": "Ask Lex",
-  "description_for_model": "Use this tool to answer user questions using Lex Fridman podcasts. If the user states 'ask Lex' use this tool to get the answer.",
+  "description_for_model": "Use this tool to answer user questions using Lex Fridman podcasts. If the user states 'ask Lex' use this tool to get the answer. This tool can also be used for follow up questions from the user and filters can be used to grab more information from specific podcasts (like by filtering for a specific podcast title).",
   "description_for_human": "Collective wisdom from the Lex Fridman podcast.",
   "auth": {
     "type": "user_http",
