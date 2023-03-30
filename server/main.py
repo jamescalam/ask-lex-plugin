@@ -1,7 +1,7 @@
 import os
 import uvicorn
 from fastapi import FastAPI, File, HTTPException, Depends, Body, UploadFile
-from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+#from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from fastapi.staticfiles import StaticFiles
 
 from models.api import (
@@ -28,15 +28,15 @@ sub_app = FastAPI(
 )
 app.mount("/sub", sub_app)
 
-bearer_scheme = HTTPBearer()
-BEARER_TOKEN = os.environ.get("BEARER_TOKEN")
-assert BEARER_TOKEN is not None
+#bearer_scheme = HTTPBearer()
+#BEARER_TOKEN = os.environ.get("BEARER_TOKEN")
+#assert BEARER_TOKEN is not None
 
 
-def validate_token(credentials: HTTPAuthorizationCredentials = Depends(bearer_scheme)):
-    if credentials.scheme != "Bearer" or credentials.credentials != BEARER_TOKEN:
-        raise HTTPException(status_code=401, detail="Invalid or missing token")
-    return credentials
+#def validate_token(credentials: HTTPAuthorizationCredentials = Depends(bearer_scheme)):
+#    if credentials.scheme != "Bearer" or credentials.credentials != BEARER_TOKEN:
+#        raise HTTPException(status_code=401, detail="Invalid or missing token")
+#    return credentials
 
 
 @app.post(
@@ -45,7 +45,7 @@ def validate_token(credentials: HTTPAuthorizationCredentials = Depends(bearer_sc
 )
 async def upsert_file(
     file: UploadFile = File(...),
-    token: HTTPAuthorizationCredentials = Depends(validate_token),
+    #token: HTTPAuthorizationCredentials = Depends(validate_token),
 ):
     document = await get_document_from_file(file)
 
@@ -63,8 +63,9 @@ async def upsert_file(
 )
 async def upsert(
     request: UpsertRequest = Body(...),
-    token: HTTPAuthorizationCredentials = Depends(validate_token),
+    #token: HTTPAuthorizationCredentials = Depends(validate_token),
 ):
+    raise NotImplementedError
     try:
         ids = await datastore.upsert(request.documents)
         return UpsertResponse(ids=ids)
@@ -79,8 +80,9 @@ async def upsert(
 )
 async def query_main(
     request: QueryRequest = Body(...),
-    token: HTTPAuthorizationCredentials = Depends(validate_token),
+    #token: HTTPAuthorizationCredentials = Depends(validate_token),
 ):
+    raise NotImplementedError
     try:
         results = await datastore.query(
             request.queries,
@@ -98,7 +100,7 @@ async def query_main(
 )
 async def query(
     request: QueryRequest = Body(...),
-    token: HTTPAuthorizationCredentials = Depends(validate_token),
+    #token: HTTPAuthorizationCredentials = Depends(validate_token),
 ):
     try:
         results = await datastore.query(
@@ -116,8 +118,9 @@ async def query(
 )
 async def delete(
     request: DeleteRequest = Body(...),
-    token: HTTPAuthorizationCredentials = Depends(validate_token),
+    #token: HTTPAuthorizationCredentials = Depends(validate_token),
 ):
+    raise NotImplementedError
     if not (request.ids or request.filter or request.delete_all):
         raise HTTPException(
             status_code=400,
