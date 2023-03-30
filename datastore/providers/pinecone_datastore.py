@@ -50,7 +50,7 @@ class PineconeDataStore(DataStore):
                     metadata_config={"indexed": fields_to_index},
                 )
                 self.index = pinecone.Index(PINECONE_INDEX)
-                print(f"Index {PINECONE_INDEX} created successfully")
+                print(f"Index {PINECONE_INDEX} created successfully. Indexed fields are {fields_to_index}")
             except Exception as e:
                 print(f"Error creating index {PINECONE_INDEX}: {e}")
                 raise e
